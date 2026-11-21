@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Store screenshot: optional caption + a REAL capture on a brand backdrop. Works at any canvas size and orientation.
+     Vars: SCREEN (required), CAPTION, SUBCAPTION, BG (backdrop image), PRIMARY, SECONDARY, FOREGROUND, FONT (font file),
+           FRAME = none | bezel, UI_SCALE (percent of the canvas the capture may use, default 86), CAPTION_SIZE (vmin, default 6.4)
+     Google Play: FRAME=none, caption at most 20 % of the image, no caption at all on tablet / Chromebook.
+     App Store:   FRAME=bezel is allowed (generic bezel, never Apple hardware imagery). -->
+<html><head><meta charset="utf-8"><style>
+  @font-face{font-family:Brand;src:url('{{FONT}}');font-weight:100 900;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;width:100%;height:100%;}
+  body{
+    background-image:url('{{BG}}'),linear-gradient(165deg,{{PRIMARY|#2563EB}},{{SECONDARY|#7C3AED}});
+    background-size:cover;background-position:center;
+    font-family:Brand,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:{{FOREGROUND|#FFFFFF}};
+    display:flex;flex-direction:column;align-items:center;overflow:hidden;
+  }
+  .caption{flex:none;max-height:20%;width:86%;padding-top:5vmin;display:flex;flex-direction:column;
+           align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+  .caption h1{font-size:calc(var(--k,1) * {{CAPTION_SIZE|6.4}}vmin);line-height:1.08;margin:0;font-weight:800;letter-spacing:-.01em;text-wrap:balance;}
+  .caption p{font-size:calc(var(--k,1) * {{CAPTION_SIZE|6.4}}vmin * .5);line-height:1.2;margin:1.4vmin 0 0;opacity:.88;font-weight:500;text-wrap:balance;}
+  .stage{flex:1;min-height:0;width:{{UI_SCALE|86}}%;padding:4.5vmin 0 5vmin;display:flex;align-items:center;justify-content:center;}
+  /* The capture is shown whole, never stretched or cropped. */
+  .stage img{display:block;max-width:100%;max-height:100%;border-radius:4.2vmin;box-shadow:0 2.6vmin 7vmin rgba(0,0,0,.28);}
+  .stage img.bezel{border:1.3vmin solid #101114;border-radius:6vmin;background:#101114;}
+</style></head><body>
+  <div class="caption" data-if="CAPTION"><h1>{{CAPTION}}</h1><p data-if="SUBCAPTION">{{SUBCAPTION}}</p></div>
+  <div class="stage"><img class="{{FRAME|none}}" src="{{SCREEN}}"></div>
+  <script>
+    // Shrink the text until it fits its box, so nothing is ever clipped.
+    const box = document.querySelector('.caption');
+    if (box) document.fonts.ready.then(() => {
+      let k = 1;
+      while ((box.scrollHeight > box.clientHeight + 1 || box.scrollWidth > box.clientWidth + 1) && k > 0.2) {
+        k -= 0.03; box.style.setProperty('--k', k);
+      }
+    });
+  </script>
+</body></html>

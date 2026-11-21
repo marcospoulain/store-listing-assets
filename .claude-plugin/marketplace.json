@@ -1,0 +1,16 @@
+{
+  "name": "store-listing-assets",
+  "owner": {
+    "name": "Marcos Poulain"
+  },
+  "metadata": {
+    "description": "Agent skill that generates App Store and Google Play listing images from an app's code, simulators and emulators."
+  },
+  "plugins": [
+    {
+      "name": "store-listing-assets",
+      "source": "./",
+      "description": "Generate App Store and Google Play listing images by reading the code and driving simulators and emulators."
+    }
+  ]
+}

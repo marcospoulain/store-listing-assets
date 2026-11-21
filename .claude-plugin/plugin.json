@@ -1,0 +1,9 @@
+{
+  "name": "store-listing-assets",
+  "description": "Generate App Store and Google Play listing images (real screenshots per device, icon, feature graphic, header) by reading the code and driving simulators and emulators.",
+  "version": "1.0.0",
+  "author": { "name": "Marcos Poulain" },
+  "repository": "https://github.com/marcospoulain/store-listing-assets",
+  "license": "MIT",
+  "keywords": ["app-store", "google-play", "screenshots", "ios", "android", "aso"]
+}

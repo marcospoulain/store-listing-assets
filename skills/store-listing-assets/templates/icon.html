@@ -1,0 +1,17 @@
+<!doctype html>
+<!-- Store icon: full-bleed opaque square, NO rounded corners, NO outer shadow (both stores apply their own mask).
+     Vars: SYMBOL (logo or symbol image, SVG or PNG), SYMBOL_SIZE (percent, default 62; 75 = Play keyline area, 100 = full-bleed art),
+           PRIMARY, SECONDARY, BG (optional full-bleed background art)
+     App Store:   1024 x 1024, no alpha            -> compose.mjs ... 1024 1024
+     Google Play: 512 x 512, 32-bit PNG, opaque    -> compose.mjs ... 512 512 --rgba -->
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;width:100%;height:100%;}
+  body{
+    background-image:url('{{BG}}'),linear-gradient(145deg,{{PRIMARY|#2563EB}},{{SECONDARY|#7C3AED}});
+    background-size:cover;background-position:center;
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  img{width:{{SYMBOL_SIZE|62}}%;height:{{SYMBOL_SIZE|62}}%;object-fit:contain;display:block;}
+</style></head><body>
+  <img data-if="SYMBOL" src="{{SYMBOL}}">
+</body></html>

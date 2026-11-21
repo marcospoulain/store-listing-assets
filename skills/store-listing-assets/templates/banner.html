@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- Wide brand art with an optional logo / title / subtitle kept inside a centered safe area.
+     Use for: Google Play feature graphic (1024x500), Android TV banner (1280x720),
+              App Store header (3840x1646), search image (3840x2560), universal asset (5244x2950).
+     Vars: BG (art image), LOGO, TITLE, SUBTITLE, PRIMARY, SECONDARY, FOREGROUND, FONT,
+           SAFE_W / SAFE_H (percent of the canvas the content may use; defaults 60 / 70),
+           TITLE_SIZE (percent of the canvas height, default 13), LAYOUT = column | row,
+           SHIFT_Y (move the content vertically, percent of the canvas height; negative = up)
+     Safe areas — Play feature graphic 60 x 70 · TV banner 80 x 70 (LAYOUT=row) ·
+                  App Store header 42 x 40 · search 56 x 40 · universal 26 x 32 with SHIFT_Y=-11.3
+                  (the universal safe area sits above the center)
+     No calls to action, no ranking / price claims, no device imagery, no store badges. -->
+<html><head><meta charset="utf-8"><style>
+  @font-face{font-family:Brand;src:url('{{FONT}}');font-weight:100 900;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;width:100%;height:100%;}
+  body{
+    background-image:url('{{BG}}'),linear-gradient(120deg,{{PRIMARY|#2563EB}},{{SECONDARY|#7C3AED}});
+    background-size:cover;background-position:center;
+    font-family:Brand,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:{{FOREGROUND|#FFFFFF}};
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .safe{width:{{SAFE_W|60}}%;height:{{SAFE_H|70}}%;display:flex;flex-direction:{{LAYOUT|column}};
+        align-items:center;justify-content:center;gap:4vh;text-align:center;overflow:hidden;
+        transform:translateY({{SHIFT_Y|0}}vh);}
+  .safe img{flex:none;max-height:46%;max-width:46%;object-fit:contain;}
+  .text{min-width:0;}
+  h1{font-size:calc(var(--k,1) * {{TITLE_SIZE|13}}vh);line-height:1;margin:0;font-weight:800;letter-spacing:-.015em;text-wrap:balance;}
+  p{font-size:calc(var(--k,1) * {{TITLE_SIZE|13}}vh * .44);line-height:1.15;margin:2.4vh 0 0;opacity:.92;font-weight:500;text-wrap:balance;}
+</style></head><body>
+  <div class="safe">
+    <img data-if="LOGO" src="{{LOGO}}">
+    <div class="text" data-if="TITLE"><h1>{{TITLE}}</h1><p data-if="SUBTITLE">{{SUBTITLE}}</p></div>
+  </div>
+  <script>
+    // Shrink the text until it fits its box, so nothing is ever clipped.
+    const box = document.querySelector('.safe');
+    if (box) document.fonts.ready.then(() => {
+      let k = 1;
+      while ((box.scrollHeight > box.clientHeight + 1 || box.scrollWidth > box.clientWidth + 1) && k > 0.2) {
+        k -= 0.03; box.style.setProperty('--k', k);
+      }
+    });
+  </script>
+</body></html>
