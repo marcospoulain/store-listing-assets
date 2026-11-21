@@ -1,0 +1,16 @@
+<!doctype html>
+<!-- Ícono de Google Play: 512x512, cuadrado a sangre, SIN esquinas redondeadas ni sombra exterior.
+     Render: node ../scripts/compose.mjs icon.html ../final/icon-512.png 512 512 --rgba -->
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;width:100%;height:100%;}
+  body{
+    /* Fondo opaco a sangre con el color de marca */
+    background: linear-gradient(145deg, {{PRIMARY}}, {{SECONDARY}});
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  /* Arte ilustrado a sangre: usa .full. Logo con forma propia: usa .keyline (≈384 px, 75 %). */
+  .full{width:100%;height:100%;object-fit:cover;}
+  .keyline{width:75%;height:75%;object-fit:contain;}
+</style></head><body>
+  <img class="{{full|keyline}}" src="{{../raw/icon-symbol.png | ruta al logo SVG/PNG}}">
+</body></html>

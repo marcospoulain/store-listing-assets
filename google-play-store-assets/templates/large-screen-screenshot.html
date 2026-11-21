@@ -1,0 +1,13 @@
+<!doctype html>
+<!-- Screenshot de tablet (7"/10") o Chromebook: 2560x1440 (16:9), sin alfa.
+     Play pide EXCLUIR el texto que no sea parte de la experiencia de la app: SIN leyendas.
+     Render: node ../scripts/compose.mjs tablet-01.html ../final/tablet-10/01.png 2560 1440 -->
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;width:100%;height:100%;}
+  body{background:{{BACKGROUND_O_PRIMARY}};display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  /* Si la captura ya es 16:9 nativa, usa .ui{width:100%;height:100%;border-radius:0;box-shadow:none} */
+  .ui{width:92%;height:90%;border-radius:36px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);}
+  .ui img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+</style></head><body>
+  <div class="ui"><img src="{{../screens/tablet-01.png}}"></div>
+</body></html>
